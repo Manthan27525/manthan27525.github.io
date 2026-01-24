@@ -1,0 +1,115 @@
+/* BASIC SETUP */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  color: #333;
+  scroll-behavior: smooth;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* NAVIGATION */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: #111;
+  color: #fff;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.2rem;
+}
+.nav-links a {
+  color: #fff;
+  font-weight: 500;
+}
+.btn-resume {
+  padding: 0.5rem 1rem;
+  background: #ff6f61;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* HERO SECTION */
+.hero {
+  background: url('https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg') center/cover no-repeat;
+  height: 55vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+}
+.hero-content h1 {
+  font-size: 2.8rem;
+  margin: 0;
+}
+.btn-primary {
+  padding: 0.7rem 1.4rem;
+  background: #ff6f61;
+  color: #fff;
+  border-radius: 8px;
+  margin-top: 1rem;
+  display: inline-block;
+}
+
+/* SECTIONS */
+.section {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+.about-section p {
+  max-width: 800px;
+  margin: auto;
+}
+
+/* SKILLS */
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+.skill-card {
+  background: #fdfdfd;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-weight: 500;
+}
+
+/* PROJECTS */
+.project-card {
+  background: #f9f9f9;
+  margin: 1rem auto;
+  padding: 1.8rem;
+  max-width: 700px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+}
+.btn-secondary {
+  padding: 0.4rem 0.9rem;
+  background: #0a72ff;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* CONTACT */
+.contact-section a {
+  color: #0a72ff;
+  font-weight: 600;
+}
+
+/* FOOTER */
+.footer {
+  background: #111;
+  padding: 1.5rem;
+  color: #fff;
+  font-size: 0.9rem;
+}
