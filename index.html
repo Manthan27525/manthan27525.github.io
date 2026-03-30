@@ -2,106 +2,165 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Manthan Singh • AI & ML Engineer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <!-- Google Fonts -->
+  <title>Manthan Singh | AI & ML Engineer</title>
+
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Stylesheet -->
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-  <!-- NAVIGATION -->
+  <!-- NAVBAR -->
   <nav class="navbar">
-    <div class="logo">Manthan Singh</div>
+    <div class="logo">MAN<span>THAN</span></div>
+
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="resume.pdf" target="_blank" class="btn-resume">Resume</a></li>
     </ul>
+
+    <a href="#" class="btn-nav">Let's Talk</a>
   </nav>
+
 
   <!-- HERO SECTION -->
   <header class="hero">
-    <div class="hero-content">
-      <h1>I am Manthan Singh</h1>
-      <p>AI & Machine Learning Student | Python Developer | Data Enthusiast</p>
-      <a href="#projects" class="btn-primary">See My Projects</a>
+
+    <!-- LEFT -->
+    <div class="hero-left" data-aos="fade-right">
+
+      <h1>Hi There, I'm</h1>
+
+      <h2>Manthan Singh</h2>
+
+      <h3>AI & ML Engineer</h3>
+
+      <p>
+        I build intelligent systems, automate workflows, and create machine learning solutions that solve real-world problems.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#projects" class="btn-primary">View Works</a>
+        <a href="#contact" class="btn-outline">Let's Talk</a>
+      </div>
+
     </div>
+
+    <!-- RIGHT -->
+    <div class="hero-right" data-aos="fade-left">
+      <img src="https://i.imgur.com/4ZQZ4Zy.png" alt="profile">
+    </div>
+
   </header>
 
-  <!-- ABOUT SECTION -->
-  <section id="about" class="section about-section">
+
+  <!-- ABOUT -->
+  <section id="about" class="section" data-aos="fade-up">
+
     <h2>About Me</h2>
+
     <p>
-      I am a Computer Science Engineering student passionate about Artificial Intelligence and Machine Learning. I build real-world projects using Python, data science, and deep learning models. My goal is to create solutions that solve real problems and make data easier to understand.
+      I am a Computer Science Engineering student specializing in Artificial Intelligence and Machine Learning. 
+      I build real-world projects like AutoML systems, AI assistants, and predictive models using Python and modern ML frameworks.
     </p>
+
   </section>
+
 
   <!-- SKILLS -->
-  <section id="skills" class="section skills-section">
-    <h2>Skills</h2>
+  <section id="skills" class="section">
+
+    <h2 data-aos="fade-up">Skills</h2>
+
     <div class="skills-container">
-      <div class="skill-card">Python</div>
-      <div class="skill-card">Machine Learning</div>
-      <div class="skill-card">Deep Learning</div>
-      <div class="skill-card">Data Analysis</div>
-      <div class="skill-card">TensorFlow & Keras</div>
-      <div class="skill-card">Pandas & NumPy</div>
-      <div class="skill-card">Scikit-Learn</div>
-      <div class="skill-card">Streamlit Deployment</div>
+
+      <div class="skill-card" data-aos="zoom-in">Python</div>
+      <div class="skill-card" data-aos="zoom-in">Machine Learning</div>
+      <div class="skill-card" data-aos="zoom-in">Deep Learning</div>
+      <div class="skill-card" data-aos="zoom-in">Data Analysis</div>
+      <div class="skill-card" data-aos="zoom-in">TensorFlow</div>
+      <div class="skill-card" data-aos="zoom-in">Scikit-Learn</div>
+      <div class="skill-card" data-aos="zoom-in">FastAPI</div>
+      <div class="skill-card" data-aos="zoom-in">Streamlit</div>
+      <div class="skill-card" data-aos="zoom-in">Langchain</div>
+
     </div>
+
   </section>
+
 
   <!-- PROJECTS -->
-  <section id="projects" class="section projects-section">
-    <h2>Projects</h2>
+  <section id="projects" class="section">
 
-    <div class="project-card">
-      <h3>Stock Price Forecasting • LSTM</h3>
-      <p>
-        Built a deep learning model using LSTM to predict stock prices. Trained on real market data and deployed with Streamlit for interactive use.
-      </p>
-      <a href="#" class="btn-secondary">View Project</a>
-    </div>
+    <h2 data-aos="fade-up">Projects</h2>
 
-    <div class="project-card">
-      <h3>Stock Clustering • Unsupervised ML</h3>
-      <p>
-        Grouped stocks using K-Means technique and visualized clusters to reveal market patterns.
-      </p>
-      <a href="#" class="btn-secondary">View Project</a>
-    </div>
+    <div class="projects-container">
 
-    <div class="project-card">
-      <h3>Superstore Data Analysis</h3>
-      <p>
-        Analyzed business data to find insights and produce actionable visual reports using Python.
-      </p>
-      <a href="#" class="btn-secondary">View Project</a>
+      <div class="project-card" data-aos="fade-up">
+        <h3>🚀 AutoDML</h3>
+        <p>
+          Automated ML pipeline that handles preprocessing, training, and prediction via API.
+        </p>
+        <a href="#" class="btn-primary">Live Demo</a>
+      </div>
+
+      <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+        <h3>🧠 AI Voice Assistant</h3>
+        <p>
+          Voice-controlled assistant with NLP and system automation features.
+        </p>
+        <a href="#" class="btn-primary">View Project</a>
+      </div>
+
+      <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+        <h3>📈 Stock Prediction</h3>
+        <p>
+          LSTM-based deep learning model for stock trend forecasting.
+        </p>
+        <a href="#" class="btn-primary">View Project</a>
+      </div>
+
     </div>
 
   </section>
 
+
   <!-- CONTACT -->
-  <section id="contact" class="section contact-section">
-    <h2>Contact Me</h2>
-    <p>Email: <a href="mailto:manthansingh27525@gmail.com">manthansingh27525@gmail.com</a></p>
-    <p>Location: Himachal Pradesh, India</p>
+  <section id="contact" class="section contact-section" data-aos="fade-up">
+
+    <h2>Let's Work Together</h2>
+
+    <p>Email: manthansingh27525@gmail.com</p>
+
     <div class="socials">
       <a href="https://github.com/Manthan27525" target="_blank">GitHub</a>
       <a href="https://linkedin.com/in/manthan077" target="_blank">LinkedIn</a>
     </div>
+
   </section>
+
 
   <!-- FOOTER -->
   <footer class="footer">
-    <p>© 2025 Manthan Singh — All Rights Reserved</p>
+    <p>© 2026 Manthan Singh — Built with ❤️</p>
   </footer>
+
+
+  <!-- AOS SCRIPT -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <!-- JS -->
+  <script src="script.js"></script>
 
 </body>
 </html>
