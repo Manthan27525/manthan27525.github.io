@@ -1,166 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ML Engineer Portfolio</title>
 
-  <title>Manthan Singh | AI & ML Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
 
-  <!-- AOS Animation -->
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+body{
+  background:#f8fafc;
+  color:#111827;
+  scroll-behavior:smooth;
+}
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="styles.css">
+/* NAV */
+nav{
+  position:sticky;
+  top:0;
+  display:flex;
+  justify-content:space-between;
+  padding:15px 8%;
+  background:white;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+  z-index:1000;
+}
+nav ul{display:flex;gap:20px;list-style:none}
+nav a:hover{color:#6366f1}
+
+/* HERO */
+.hero{
+  padding:120px 8% 80px;
+  text-align:center;
+  background:linear-gradient(135deg,#eef2ff,#f5f3ff);
+}
+.hero h1{font-size:2.8rem}
+.hero span{
+  background:linear-gradient(90deg,#6366f1,#8b5cf6);
+  background-clip:text;
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.hero h2{margin:10px 0;height:30px;color:#4f46e5}
+.hero p{max-width:600px;margin:10px auto;color:#6b7280}
+
+.btn{
+  background:#6366f1;
+  color:white;
+  padding:10px 20px;
+  border-radius:6px;
+  margin:10px;
+  display:inline-block;
+}
+.btn-outline{
+  border:1px solid #6366f1;
+  padding:10px 20px;
+  border-radius:6px;
+  margin:10px;
+}
+
+/* SECTION */
+section{padding:60px 8%}
+h2{text-align:center;margin-bottom:30px}
+
+/* GRID */
+.grid{display:grid;gap:20px}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+
+/* CARD */
+.card{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  border:1px solid #e5e7eb;
+  transition:0.3s;
+}
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 10px 20px rgba(0,0,0,0.08);
+}
+
+/* SKILLS */
+.pill{
+  display:inline-block;
+  padding:6px 12px;
+  margin:5px;
+  border-radius:20px;
+  background:#eef2ff;
+  color:#4338ca;
+}
+
+/* TIMELINE */
+.timeline{border-left:3px solid #6366f1;padding-left:15px}
+.timeline-item{margin-bottom:20px}
+
+/* CONTACT */
+.contact-icons{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  font-size:1.5rem;
+  margin-bottom:20px;
+}
+.contact-icons a:hover{color:#6366f1}
+
+form{
+  max-width:400px;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+}
+input,textarea{
+  margin:10px 0;
+  padding:10px;
+  border-radius:5px;
+  border:1px solid #ddd;
+}
+button{
+  background:#6366f1;
+  color:white;
+  padding:10px;
+  border:none;
+  cursor:pointer;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:20px;
+  color:#6b7280;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero h1{font-size:2rem}
+}
+</style>
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <div class="logo">MAN<span>THAN</span></div>
+<!-- NAV -->
+<nav>
+  <h3><!-- EDIT: Name -->Manthan Singh</h3>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+<!-- HERO -->
+<section class="hero">
+  <h1>Hi, I'm <span><!-- EDIT -->Manthan Singh</span></h1>
+  <h2 id="typing"></h2>
+  <p><!-- EDIT -->
+    I build data-driven solutions that bridge theory and real-world applications. My work focuses on developing models that turn complex data into meaningful insights and practical decision-making tools.
+  </p>
+  <a href="#projects" class="btn">View Projects</a>
+  <a href="resume.pdf" class="btn-outline">Download Resume</a>
+</section>
 
-    <a href="#" class="btn-nav">Let's Talk</a>
-  </nav>
+<!-- ABOUT -->
+<section id="about">
+  <h2>About Me</h2>
+  <p style="text-align:center; max-width:700px; margin:auto;">
+    <!-- EDIT -->
+    I'm a passionate AI/ML Engineer with strong experience in building predictive models,
+    automation systems, and intelligent applications. I focus on real-world impact using ML & DL.
+  </p>
 
+<!-- SKILLS -->
+<section id="skills">
+  <h2>Skills</h2>
 
-  <!-- HERO SECTION -->
-  <header class="hero">
+  <div style="text-align:center">
+    <h4>ML / DL</h4>
+    <span class="pill">TensorFlow</span>
+    <span class="pill">PyTorch</span>
+    <span class="pill">Scikit-learn</span>
 
-    <!-- LEFT -->
-    <div class="hero-left" data-aos="fade-right">
+    <h4 style="margin-top:20px;">Languages</h4>
+    <span class="pill">Python</span>
 
-      <h1>Hi There, I'm</h1>
+    <h4 style="margin-top:20px;">Deployment</h4>
+    <span class="pill">Fastapi</span>
 
-      <h2>Manthan Singh</h2>
+    <h4 style="margin-top:20px;">Tools</h4>
+    <span class="pill">Pandas</span>
+    <span class="pill">NumPy</span>
+    <span class="pill">Docker</span>
+    <span class="pill">Langchain</span>
+  </div>
+</section>
 
-      <h3>AI & ML Engineer</h3>
+<!-- PROJECTS -->
+<section id="projects">
+  <h2>Projects</h2>
 
-      <p>
-        I build intelligent systems, automate workflows, and create machine learning solutions that solve real-world problems.
-      </p>
-
-      <div class="hero-buttons">
-        <a href="#projects" class="btn-primary">View Works</a>
-        <a href="#contact" class="btn-outline">Let's Talk</a>
-      </div>
-
+  <div class="grid grid-3">
+    <div class="card">
+      <h3>AutoDML</h3>
+      <p>AutoDML(Automated Data Mining and Machine Learning) focuses on automating the typical process data preprosessing, feature engineering, model training, model optimization and evaluation.</p>
     </div>
 
-    <!-- RIGHT 
-    <div class="hero-right" data-aos="fade-left">
-      <img src="https://i.imgur.com/4ZQZ4Zy.png" alt="profile">
+    <div class="card">
+      <h3>Stocks Price Forecasting</h3>
+      <p>This project focuses on creating a automatic pipeline which automatically retrives NIFTY 50 stocks data and can make prediction models using LSTM,s for every individual ticker and can stay updated in one click.</p>
     </div>
 
-  </header>
--->
-
-  <!-- ABOUT -->
-  <section id="about" class="section" data-aos="fade-up">
-
-    <h2>About Me</h2>
-
-    <p>
-      I am a Computer Science Engineering student specializing in Artificial Intelligence and Machine Learning. 
-      I build real-world projects like AutoML systems, AI assistants, and predictive models using Python and modern ML frameworks.
-    </p>
-
-  </section>
-
-
-  <!-- SKILLS -->
-  <section id="skills" class="section">
-
-    <h2 data-aos="fade-up">Skills</h2>
-
-    <div class="skills-container">
-
-      <div class="skill-card" data-aos="zoom-in">Python</div>
-      <div class="skill-card" data-aos="zoom-in">Machine Learning</div>
-      <div class="skill-card" data-aos="zoom-in">Deep Learning</div>
-      <div class="skill-card" data-aos="zoom-in">Data Analysis</div>
-      <div class="skill-card" data-aos="zoom-in">TensorFlow</div>
-      <div class="skill-card" data-aos="zoom-in">Scikit-Learn</div>
-      <div class="skill-card" data-aos="zoom-in">FastAPI</div>
-      <div class="skill-card" data-aos="zoom-in">Streamlit</div>
-      <div class="skill-card" data-aos="zoom-in">Langchain</div>
-
+    <div class="card">
+      <h3>Real-time Object Detection</h3>
+      <p>YOLOv8 based detection system for live video.</p>
     </div>
+  </div>
+</section>
 
-  </section>
-
-
-  <!-- PROJECTS -->
-  <section id="projects" class="section">
-
-    <h2 data-aos="fade-up">Projects</h2>
-
-    <div class="projects-container">
-
-      <div class="project-card" data-aos="fade-up">
-        <h3>🚀 AutoDML</h3>
-        <p>
-          Automated ML pipeline that handles preprocessing, training, and prediction via API.
-        </p>
-        <a href="#" class="btn-primary">Live Demo</a>
-      </div>
-
-      <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-        <h3>🧠 AI Voice Assistant</h3>
-        <p>
-          Voice-controlled assistant with NLP and system automation features.
-        </p>
-        <a href="#" class="btn-primary">View Project</a>
-      </div>
-
-      <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-        <h3>📈 Stock Prediction</h3>
-        <p>
-          LSTM-based deep learning model for stock trend forecasting.
-        </p>
-        <a href="#" class="btn-primary">View Project</a>
-      </div>
-
+<!-- EXPERIENCE -->
+<section>
+  <h2>Experience</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <h4><!-- EDIT -->ML Intern</h4>
+      <p><!-- EDIT -->Ziion Technology | 2026</p>
+      <p>Worked on predictive modeling and deployment pipelines.</p>
     </div>
+  </div>
+</section>
 
-  </section>
+<!-- EDUCATION -->
+<section>
+  <h2>Education</h2>
+  <p style="text-align:center;">
+    <!-- EDIT -->
+    B.Tech in Computer Science | 2022 - 2026
+  </p>
+</section>
 
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contact</h2>
 
-  <!-- CONTACT -->
-  <section id="contact" class="section contact-section" data-aos="fade-up">
+  <div class="contact-icons">
+    <a href="www.linkedin.com/in/manthan077"><i class="fab fa-linkedin"></i></a>
+    <a href="https://github.com/Manthan27525"><i class="fab fa-github"></i></a>
+    <a href="manthansingh27525@gmail.com"><i class="fas fa-envelope"></i></a>
+  </div>
 
-    <h2>Let's Work Together</h2>
+  <form>
+    <input type="text" placeholder="Name">
+    <input type="email" placeholder="Email">
+    <textarea placeholder="Message"></textarea>
+    <button>Send</button>
+  </form>
+</section>
 
-    <p>Email: manthansingh27525@gmail.com</p>
+<footer>
+  © 2026 Manthan | ML Engineer
+</footer>
 
-    <div class="socials">
-      <a href="https://github.com/Manthan27525" target="_blank">GitHub</a>
-      <a href="https://linkedin.com/in/manthan077" target="_blank">LinkedIn</a>
-    </div>
-
-  </section>
-
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <p>© 2026 Manthan Singh — Built with ❤️</p>
-  </footer>
-
-
-  <!-- AOS SCRIPT -->
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-
-  <!-- JS -->
-  <script src="script.js"></script>
+<script>
+// Typing Effect
+const roles=["AI/ML Engineer","Data Scientist","Deep Learning Enthusiast"];
+let i=0,j=0,current="",del=false;
+function type(){
+  current=roles[i];
+  document.getElementById("typing").textContent=current.substring(0,j);
+  if(!del && j++===current.length){del=true;setTimeout(type,1000);return;}
+  if(del && j--===0){del=false;i=(i+1)%roles.length;}
+  setTimeout(type,del?50:100);
+}
+type();
+</script>
 
 </body>
 </html>
