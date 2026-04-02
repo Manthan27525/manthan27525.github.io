@@ -74,7 +74,17 @@ h2{text-align:center;margin-bottom:30px}
 
 /* GRID */
 .grid{display:grid;gap:20px}
-.grid-3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .grid-3 {
+    grid-template-columns: 1fr; /* 1 column on mobile */
+  }
+}
 
 /* CARD */
 .card{
@@ -247,8 +257,9 @@ nav{
   <div style="text-align:center">
     <h4>ML / DL</h4>
     <span class="pill">TensorFlow</span>
-    <span class="pill">PyTorch</span>
+    <span class="pill">TensorFlow</span>
     <span class="pill">Scikit-learn</span>
+    <span class="pill">Optuna</span>
 
     <h4 style="margin-top:20px;">Languages</h4>
     <span class="pill">Python</span>
@@ -265,7 +276,7 @@ nav{
 </section>
 
 <!-- PROJECTS -->
-<section id="projects" class="reveal">
+
   <h2>Projects</h2>
 
   <div class="grid grid-3">
