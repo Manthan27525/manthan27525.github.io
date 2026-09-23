@@ -1,0 +1,78 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import { projects, type Project } from '../data/projects';
+
+const pick = (slugs: string[]) => slugs.map((s) => projects.find((p) => p.slug === s)!) as Project[];
+
+const areas = [
+  {
+    id: 'analytics',
+    title: 'Data Analytics',
+    intro: 'SQL, ETL, data warehousing, EDA and visual storytelling.',
+    capabilities: ['T-SQL & stored procedures', 'Medallion ETL', 'Star-schema modelling', 'EDA & segmentation', 'Matplotlib / Seaborn / Plotly'],
+    items: pick(['sql-data-warehouse', 'global-superstore-analysis', 'yearly-inflation-calculator']),
+  },
+  {
+    id: 'ds-ai',
+    title: 'Data Science & AI',
+    intro: 'Machine learning, deep learning, NLP, transformers and LLM applications.',
+    capabilities: ['AutoML & Optuna tuning', 'LSTM & CNN models', 'Transformer fine-tuning', 'LangChain + FAISS RAG', 'FastAPI / Docker serving'],
+    items: pick(['autodml', 'finance-slm', 'sign-language-classification', 'trademind-ai']),
+  },
+  {
+    id: 'finance',
+    title: 'Finance',
+    intro: 'Market and macro data projects, built for learning and research. None of them make trading-performance claims.',
+    capabilities: ['yfinance data pipelines', 'Time-series forecasting', 'Stock clustering', 'CPI & inflation maths', 'Portfolio allocation logic'],
+    items: pick(['nifty50-stock-forecasting', 'stock-market-clustering', 'sp500-prediction', 'asset-allocation-calculator']),
+  },
+];
+---
+
+<section id="focus" class="section" aria-labelledby="focus-title">
+  <div class="container-page">
+    <SectionHeading index="04" label="Focus areas" id="focus-title">
+      Where my work <span class="serif">concentrates</span>
+    </SectionHeading>
+
+    <div class="mt-14 grid border-t border-fg/80 lg:mt-20 lg:grid-cols-3" data-reveal>
+      {
+        areas.map((a, i) => (
+          <section
+            id={a.id}
+            class:list={['flex flex-col border-b border-line py-10 lg:border-b-0 lg:py-12', i > 0 && 'lg:border-l lg:pl-10', i < 2 && 'lg:pr-10']}
+            aria-labelledby={`${a.id}-title`}
+          >
+            <p class="font-mono text-[11px] text-accent tabular-nums">{String(i + 1).padStart(2, '0')} / 03</p>
+            <h3 id={`${a.id}-title`} class="mt-4 text-3xl font-semibold" style="letter-spacing:-0.04em">
+              {a.title}
+            </h3>
+            <p class="mt-3 leading-relaxed text-muted">{a.intro}</p>
+
+            <ul class="mt-6 flex flex-wrap gap-1.5" aria-label={`${a.title} capabilities`}>
+              {a.capabilities.map((c) => (
+                <li class="chip">{c}</li>
+              ))}
+            </ul>
+
+            <ul class="mt-8 border-t border-line">
+              {a.items.map((p) => (
+                <li class="border-b border-line">
+                  <a href={`/projects/${p.slug}/`} class="group block py-4">
+                    <span class="flex items-center justify-between gap-3 font-medium transition-colors group-hover:text-accent">
+                      {p.name}
+                      <span class="text-muted transition-transform duration-200 group-hover:translate-x-1 group-hover:text-accent" aria-hidden="true">
+                        →
+                      </span>
+                    </span>
+                    <span class="mt-1 block text-sm leading-snug text-muted">{p.tagline}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</section>

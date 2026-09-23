@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1254 1254" role="img" aria-label="Manthan Singh logo">
+  <title>Manthan Singh</title>
+  <defs>
+    <linearGradient id="msw-s" x1="650" y1="436" x2="1084" y2="805" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFA21C"/><stop offset="1" stop-color="#C44304"/></linearGradient>
+    <linearGradient id="msw-v" x1="0" y1="425" x2="0" y2="895" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFA21C"/><stop offset="1" stop-color="#D4560A"/></linearGradient>
+  </defs>
+  <rect width="1254" height="1254" fill="#FEFEFE"/>
+  <path fill="#141414" d="M169 348 439 597 612 441V880L529 800V634L430 724 254 568V863H169Z"/>
+  <path fill="url(#msw-v)" d="M614 440 630 425V895L614 880Z"/>
+  <path fill="url(#msw-v)" d="M272 762 305 740V863H272ZM323 704 357 684V863H323Z"/>
+  <path fill="#141414" d="M748 350H1084V558L975 454H698L669 426Z"/>
+  <path fill="url(#msw-s)" d="M650 436 795 561H963L1084 665V805L920 663H764L650 570Z"/>
+  <path fill="#141414" d="M650 762H1003L1063 814 1015 863H650Z"/>
+</svg>

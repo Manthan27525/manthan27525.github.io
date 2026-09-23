@@ -1,0 +1,58 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import { skillGroups } from '../data/skills';
+---
+
+<section id="skills" class="section" aria-labelledby="skills-title">
+  <div class="container-page">
+    <SectionHeading index="02" label="Skills" id="skills-title">
+      Tools I’ve used in <span class="serif">real projects</span>
+      <Fragment slot="intro">Each group lists the projects where you can see these tools in the code.</Fragment>
+    </SectionHeading>
+
+    <div class="mt-14 lg:mt-20" data-reveal>
+      <div
+        class="hidden grid-cols-12 gap-8 border-b border-fg/80 pb-3 font-mono text-[10.5px] tracking-[0.12em] text-muted uppercase lg:grid"
+        aria-hidden="true"
+      >
+        <span class="col-span-3">Category</span>
+        <span class="col-span-6">Tools</span>
+        <span class="col-span-3">Used in</span>
+      </div>
+
+      <ul>
+        {
+          skillGroups.map((g, i) => (
+            <li class="skill-row group grid gap-4 border-b border-line py-7 transition-colors lg:grid-cols-12 lg:gap-8 lg:py-8">
+              <h3 class="flex items-baseline gap-4 lg:col-span-3">
+                <span class="font-mono text-[11px] text-accent tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                <span class="text-xl font-semibold tracking-tight">{g.title}</span>
+              </h3>
+              <ul class="flex flex-wrap content-start items-start gap-1.5 lg:col-span-6" aria-label={`${g.title} skills`}>
+                {g.skills.map((s) => (
+                  <li class="rounded-[2px] border border-line bg-surface px-2.5 py-1 text-[13px] text-fg transition-colors group-hover:border-line-strong">
+                    {s}
+                  </li>
+                ))}
+              </ul>
+              <p class="text-sm leading-relaxed text-muted lg:col-span-3">
+                <span class="font-mono text-[10.5px] tracking-[0.1em] text-accent uppercase lg:hidden">Used in · </span>
+                {g.evidence}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .skill-row h3 span:last-child {
+    background: linear-gradient(var(--accent), var(--accent)) no-repeat left 100% / 0 1px;
+    transition: background-size 0.35s ease;
+  }
+  .skill-row:hover h3 span:last-child {
+    background-size: 100% 1px;
+  }
+</style>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://manthan27525.github.io/sitemap-index.xml

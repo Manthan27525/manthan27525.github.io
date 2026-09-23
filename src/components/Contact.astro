@@ -1,0 +1,70 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+
+const channels = [
+  { icon: 'mail', label: 'Email', value: site.email, href: `mailto:${site.email}`, external: false },
+  { icon: 'linkedin', label: 'LinkedIn', value: 'in/manthan077', href: site.links.linkedin, external: true },
+  { icon: 'github', label: 'GitHub', value: 'Manthan27525', href: site.links.github, external: true },
+  { icon: 'x', label: 'X / Twitter', value: '@Manthan0088', href: site.links.x, external: true },
+] as const;
+---
+
+<section id="contact" class="py-24 sm:py-32" aria-labelledby="contact-title">
+  <div class="container-page" data-reveal>
+    <div class="border-t border-line pt-6">
+      <p class="eyebrow flex items-center gap-3">
+        <span class="text-accent">06</span>
+        <span class="h-px w-6 bg-line-strong" aria-hidden="true"></span>
+        Contact
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-14 lg:grid-cols-12 lg:gap-8">
+      <div class="lg:col-span-7">
+        <h2
+          id="contact-title"
+          class="text-5xl font-semibold text-balance sm:text-7xl lg:text-8xl"
+          style="letter-spacing:-0.055em;line-height:0.98"
+        >
+          Let’s talk about <span class="serif text-accent">data</span>
+        </h2>
+        <p class="mt-8 max-w-md text-lg leading-relaxed text-muted">
+          I’m looking for Data Scientist, Data Analyst, ML Engineer and AI/ML Engineer roles. Email is the quickest way to
+          reach me.
+        </p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href={`mailto:${site.email}?subject=Opportunity%20for%20Manthan%20Singh`} class="btn btn-primary">
+            <Icon name="mail" size={15} /> Email me <Icon name="arrow-right" size={15} class="nudge" />
+          </a>
+          <a href={site.resume} class="btn btn-secondary" download>
+            <Icon name="download" size={15} /> Download resume
+          </a>
+        </div>
+      </div>
+
+      <ul class="self-end border-t border-fg/80 lg:col-span-5">
+        {
+          channels.map((c) => (
+            <li class="border-b border-line">
+              <a
+                href={c.href}
+                class="group flex items-center gap-5 py-6"
+                {...(c.external ? { target: '_blank', rel: 'me noopener' } : {})}
+              >
+                <Icon name={c.icon} size={18} class="shrink-0 text-muted transition-colors group-hover:text-accent" />
+                <span class="min-w-0 flex-1">
+                  <span class="eyebrow block">{c.label}</span>
+                  <span class="mt-1 block truncate text-lg font-medium tracking-tight transition-colors group-hover:text-accent">{c.value}</span>
+                </span>
+                <span class="grid size-9 shrink-0 place-items-center rounded-[3px] border border-line text-fg transition-colors group-hover:border-accent group-hover:text-accent">
+                  <Icon name="arrow-up-right" size={14} />
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

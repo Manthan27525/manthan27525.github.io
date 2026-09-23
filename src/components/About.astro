@@ -1,0 +1,62 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+const facts = [
+  {
+    label: 'Education',
+    value: 'B.Tech, Computer Science & Engineering',
+    sub: 'Government College Dharamshala · 2022–2026',
+  },
+  {
+    label: 'Certification',
+    value: 'Complete Data Science, ML, DL & NLP Bootcamp',
+    sub: 'Udemy',
+  },
+  { label: 'Interests', value: 'AI, Generative AI & Robotics', sub: '' },
+  { label: 'Based in', value: 'Kangra, Himachal Pradesh, India', sub: 'Open to Data Science, Analytics & ML roles' },
+];
+---
+
+<section id="about" class="section" aria-labelledby="about-title">
+  <div class="container-page">
+    <SectionHeading index="01" label="About" id="about-title">
+      From raw data to <span class="serif">deployed models</span>
+    </SectionHeading>
+
+    <div class="mt-14 grid gap-14 lg:mt-20 lg:grid-cols-12 lg:gap-8" data-reveal>
+      <div class="space-y-6 text-lg leading-relaxed text-pretty text-muted lg:col-span-6 lg:col-start-4">
+        <p class="text-xl leading-relaxed font-medium text-fg">
+          I started with Python and SQL, and learned the most from building complete projects. That means cleaning and
+          modelling data myself, training and tuning models, and shipping the result as an app someone can actually use.
+        </p>
+        <p>
+          My work covers the full data stack. I’ve built a <a href="/projects/sql-data-warehouse/" class="link"
+            >SQL Server data warehouse</a
+          > with a Bronze → Silver → Gold ETL, done exploratory analysis on retail data, and built <a
+            href="/projects/autodml/"
+            class="link">AutoDML</a
+          >, an AutoML package with a FastAPI backend and Docker image.
+        </p>
+        <p>
+          I’m especially interested in financial data. I’ve trained LSTM models for every NIFTY 50 stock, clustered stocks by
+          price behaviour, fine-tuned GPT-2, FLAN-T5 and BART on finance Q&amp;A, and built a CPI inflation calculator for 192
+          countries.
+        </p>
+      </div>
+
+      <dl class="self-start border-t border-fg/80 lg:col-span-3">
+        {
+          facts.map((f) => (
+            <div class="border-b border-line py-5">
+              <dt class="eyebrow">{f.label}</dt>
+              <dd class="mt-2">
+                <span class="block font-medium">{f.value}</span>
+                {f.sub && <span class="mt-1 block text-sm text-muted">{f.sub}</span>}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</section>

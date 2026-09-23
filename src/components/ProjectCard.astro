@@ -1,0 +1,136 @@
+---
+import Icon from './Icon.astro';
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  index: number;
+}
+
+const { project: p, index } = Astro.props;
+const href = `/projects/${p.slug}/`;
+---
+
+<article
+  class="case group relative flex h-full flex-col rounded-[4px] border border-line bg-surface p-6 sm:p-9"
+  aria-labelledby={`card-${p.slug}`}
+>
+  <header class="flex flex-wrap items-start justify-between gap-4">
+    <span class="flex items-baseline gap-3">
+      <span class="text-4xl font-semibold tracking-tight text-accent tabular-nums" style="letter-spacing:-0.05em">
+        {String(index + 1).padStart(2, '0')}
+      </span>
+      <span class="font-mono text-[10.5px] tracking-[0.12em] text-muted uppercase">Case study</span>
+    </span>
+    <ul class="flex flex-wrap justify-end gap-x-4 gap-y-1.5 pt-1" aria-label="Categories">
+      {p.categories.map((c) => <li class="tag">{c}</li>)}
+      {p.status && <li class="rounded-[2px] bg-accent-soft px-2 py-0.5 font-mono text-[10.5px] tracking-wide text-accent uppercase">{p.status}</li>}
+    </ul>
+  </header>
+
+  <h3 id={`card-${p.slug}`} class="mt-10 text-[1.75rem] font-semibold sm:text-[2.1rem]" style="letter-spacing:-0.045em;line-height:1.05">
+    <a href={href} class="title-link after:absolute after:inset-0 focus-visible:outline-none">{p.name}</a>
+  </h3>
+  <p class="mt-4 max-w-xl text-[15px] leading-relaxed text-muted">{p.tagline}</p>
+
+  <dl class="mt-9 grid gap-6 border-t border-line pt-6 text-sm leading-relaxed sm:grid-cols-2 sm:gap-8">
+    <div>
+      <dt class="eyebrow text-fg">Problem</dt>
+      <dd class="mt-2 line-clamp-4 text-muted">{p.problem}</dd>
+    </div>
+    <div>
+      <dt class="eyebrow text-fg">Solution</dt>
+      <dd class="mt-2 line-clamp-4 text-muted">{p.solution}</dd>
+    </div>
+  </dl>
+
+  <div class="mt-7">
+    <p class="eyebrow text-fg">Key features</p>
+    <ul class="mt-3 space-y-2 text-sm text-muted">
+      {
+        p.features.slice(0, 3).map((f) => (
+          <li class="flex gap-3">
+            <span class="mt-[0.6rem] h-px w-3 shrink-0 bg-accent" aria-hidden="true" />
+            <span>{f}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  {
+    p.stats && (
+      <dl class="mt-8 grid grid-cols-3 border-y border-line bg-surface-2/50">
+        {p.stats.map((s, i) => (
+          <div class:list={['px-4 py-4', i > 0 && 'border-l border-line']}>
+            <dt class="sr-only">{s.label}</dt>
+            <dd class="text-xl font-semibold tracking-tight tabular-nums sm:text-2xl">{s.value}</dd>
+            <dd class="mt-1 font-mono text-[10.5px] leading-tight text-muted">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    )
+  }
+
+  <ul class="mt-8 mb-9 flex flex-wrap gap-1.5" aria-label="Technologies">
+    {p.stack.map((t) => <li class="chip">{t}</li>)}
+  </ul>
+
+  <footer class="relative z-10 mt-auto flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
+    <a href={href} class="read inline-flex items-center gap-2 text-sm font-semibold">
+      Read case study
+      <Icon name="arrow-right" size={15} class="text-accent transition-transform duration-200" />
+    </a>
+    <span class="flex items-center gap-5 text-sm">
+      {
+        p.repo && (
+          <a href={p.repo} class="inline-flex items-center gap-1.5 text-muted transition-colors hover:text-accent" target="_blank" rel="noopener">
+            <Icon name="github" size={14} /> Code
+            <span class="sr-only">for {p.name} on GitHub</span>
+          </a>
+        )
+      }
+      {
+        p.demo && (
+          <a href={p.demo} class="inline-flex items-center gap-1.5 text-muted transition-colors hover:text-accent" target="_blank" rel="noopener">
+            {p.demoLabel ?? 'Live demo'} <Icon name="arrow-up-right" size={13} />
+            <span class="sr-only">of {p.name}</span>
+          </a>
+        )
+      }
+    </span>
+  </footer>
+</article>
+
+<style>
+  .case {
+    transition:
+      transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+      box-shadow 0.35s ease,
+      border-color 0.35s ease;
+  }
+  .case:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow);
+  }
+  .title-link {
+    background: linear-gradient(var(--accent), var(--accent)) no-repeat left 96% / 0 2px;
+    transition: background-size 0.4s ease;
+  }
+  .case:hover .title-link {
+    background-size: 100% 2px;
+  }
+  .case:hover .read svg {
+    transform: translateX(4px);
+  }
+  .case:has(.title-link:focus-visible) {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .case:hover {
+      transform: none;
+    }
+  }
+</style>

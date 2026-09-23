@@ -1,0 +1,196 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/*
+  Warm white + black + burnt orange. Light is the default theme; dark is opt-in
+  via data-theme="dark". --accent is used for text, rules and small marks only,
+  never as a large background.
+*/
+:root {
+  --bg: #faf9f6;
+  --surface: #ffffff; /* cards */
+  --surface-2: #f3f1ec; /* secondary background */
+  --border: #e5e2dc;
+  --border-strong: #cfcac1;
+  --text: #171717;
+  --muted: #6b6b6b;
+  --accent: #c65d32;
+  --accent-soft: #f1ded5;
+  --ink: #171717; /* primary button background */
+  --ink-text: #faf9f6;
+  --shadow: 0 1px 2px rgb(23 23 23 / 0.04), 0 12px 32px -12px rgb(23 23 23 / 0.12);
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #121110;
+  --surface: #1a1918;
+  --surface-2: #161514;
+  --border: #2b2926;
+  --border-strong: #423f3a;
+  --text: #f3f1ec;
+  --muted: #a39f97;
+  --accent: #e07a4f;
+  --accent-soft: rgb(224 122 79 / 0.14);
+  --ink: #f3f1ec;
+  --ink-text: #121110;
+  --shadow: 0 12px 32px -12px rgb(0 0 0 / 0.6);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-fg: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-ink: var(--ink);
+  --color-ink-text: var(--ink-text);
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--text);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+
+  .section {
+    @apply border-b border-line py-24 sm:py-32;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[11px] font-medium tracking-[0.14em] text-muted uppercase;
+  }
+
+  .section-title {
+    @apply text-4xl font-semibold text-balance sm:text-5xl lg:text-6xl;
+    letter-spacing: -0.045em;
+    line-height: 1.02;
+  }
+
+  /* Emphasised phrase inside a heading: two-tone editorial treatment. Orange is
+     reserved for the hero and contact headings, which add .text-accent explicitly. */
+  .serif {
+    color: var(--muted);
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-[3px] px-5 py-3 text-sm font-medium transition-[background-color,border-color,color,transform] duration-200;
+  }
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+  .btn svg {
+    transition: transform 0.2s ease;
+  }
+  .btn:hover svg.nudge {
+    transform: translateX(3px);
+  }
+
+  .btn-primary {
+    @apply bg-ink text-ink-text hover:bg-accent hover:text-white;
+  }
+
+  .btn-secondary {
+    @apply border border-fg text-fg hover:border-accent hover:text-accent;
+  }
+
+  .btn-ghost {
+    @apply text-muted hover:text-accent;
+  }
+
+  .card {
+    @apply rounded-[4px] border border-line bg-surface;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-[2px] border border-line bg-surface-2/60 px-2 py-0.5 font-mono text-[11px] leading-5 text-muted;
+  }
+
+  .tag {
+    @apply inline-flex items-center gap-1.5 font-mono text-[10.5px] tracking-[0.1em] text-muted uppercase;
+  }
+  .tag::before {
+    content: '';
+    @apply size-1 bg-accent;
+  }
+
+  /* Animated underline for text links. */
+  .link {
+    @apply text-fg;
+    background: linear-gradient(currentColor, currentColor) no-repeat left 100% / 100% 1px;
+    transition:
+      color 0.2s ease,
+      background-size 0.3s ease;
+  }
+  .link:hover {
+    color: var(--accent);
+  }
+}
+
+/* Scroll reveal. Content is visible by default; only hidden once JS adds .js. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

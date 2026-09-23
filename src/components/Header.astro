@@ -1,0 +1,148 @@
+---
+import Icon from './Icon.astro';
+import Logo from './Logo.astro';
+import { nav, site } from '../data/site';
+---
+
+<header class="sticky top-0 z-50 border-b border-line bg-bg/92 backdrop-blur-sm">
+  <div class="container-page flex h-16 items-center justify-between gap-6">
+    <a href="/" class="group flex items-center gap-3" aria-label="Manthan Singh — home">
+      <Logo size={34} id="header" class="shrink-0 transition-transform duration-300 group-hover:-rotate-3" />
+      <span class="text-[15px] font-semibold tracking-tight">{site.name}</span>
+    </a>
+
+    <nav aria-label="Primary" class="hidden md:block">
+      <ul class="flex items-center gap-8">
+        {
+          nav.map((item) => (
+            <li>
+              <a href={item.href} class="nav-link text-[13px] font-medium text-fg/75 transition-colors hover:text-accent">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <button
+        type="button"
+        data-theme-toggle
+        class="grid size-9 place-items-center rounded-[3px] text-muted transition-colors hover:text-accent"
+        aria-label="Switch to dark theme"
+      >
+        <Icon name="sun" size={17} class="theme-icon-sun" />
+        <Icon name="moon" size={17} class="theme-icon-moon" />
+      </button>
+      <a href={site.resume} class="btn btn-secondary hidden !px-3.5 !py-1.5 !text-[13px] sm:inline-flex" download>
+        <Icon name="download" size={13} /> Resume
+      </a>
+      <button
+        type="button"
+        data-menu-toggle
+        class="grid size-9 place-items-center rounded-[3px] text-fg hover:text-accent md:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label="Open menu"
+      >
+        <Icon name="menu" size={20} class="menu-open-icon" />
+        <Icon name="close" size={20} class="menu-close-icon hidden" />
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-nav" aria-label="Mobile" class="hidden border-t border-line bg-bg md:hidden">
+    <ul class="container-page flex flex-col py-4">
+      {
+        nav.map((item, i) => (
+          <li class="border-b border-line last:border-0">
+            <a href={item.href} class="flex items-baseline gap-4 py-3.5 text-lg font-medium tracking-tight hover:text-accent">
+              <span class="font-mono text-[11px] text-accent">{String(i + 1).padStart(2, '0')}</span>
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+      <li class="pt-4">
+        <a href={site.resume} class="btn btn-primary w-full" download>
+          <Icon name="download" size={14} /> Download resume
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<style is:global>
+  /* Global because the icons render inside the Icon component, outside this component's scope. */
+  [data-theme='dark'] .theme-icon-moon,
+  [data-theme='light'] .theme-icon-sun {
+    display: none;
+  }
+  .nav-link {
+    background: linear-gradient(var(--accent), var(--accent)) no-repeat left bottom / 0 1px;
+    padding-bottom: 4px;
+    transition:
+      background-size 0.3s ease,
+      color 0.2s ease;
+  }
+  .nav-link:hover,
+  .nav-link[aria-current='true'] {
+    background-size: 100% 1px;
+    color: var(--accent);
+  }
+</style>
+
+<script>
+  const root = document.documentElement;
+  const toggle = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  const syncLabel = () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    toggle?.setAttribute('aria-label', `Switch to ${next} theme`);
+    document
+      .querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')
+      .forEach((m) => (m.content = root.dataset.theme === 'dark' ? '#121110' : '#FAF9F6'));
+  };
+  syncLabel();
+  toggle?.addEventListener('click', () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem('theme', next);
+    } catch {}
+    syncLabel();
+  });
+
+  const menuBtn = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.getElementById('mobile-nav');
+  const setMenu = (open: boolean) => {
+    menu?.classList.toggle('hidden', !open);
+    menuBtn?.setAttribute('aria-expanded', String(open));
+    menuBtn?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menuBtn?.querySelector('.menu-open-icon')?.classList.toggle('hidden', open);
+    menuBtn?.querySelector('.menu-close-icon')?.classList.toggle('hidden', !open);
+  };
+  menuBtn?.addEventListener('click', () => setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'));
+  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setMenu(false);
+  });
+
+  // Highlight the nav item for the section currently in view (home page only).
+  const links = document.querySelectorAll<HTMLAnchorElement>('.nav-link');
+  const sections = [...links]
+    .map((a) => document.getElementById(a.hash.slice(1)))
+    .filter((s): s is HTMLElement => !!s);
+  if (sections.length && 'IntersectionObserver' in window) {
+    const spy = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          links.forEach((a) => a.setAttribute('aria-current', String(a.hash === `#${e.target.id}`)));
+        }
+      },
+      { rootMargin: '-45% 0px -50% 0px' },
+    );
+    sections.forEach((s) => spy.observe(s));
+  }
+</script>

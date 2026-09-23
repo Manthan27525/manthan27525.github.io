@@ -1,0 +1,85 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import SectionHeading from './SectionHeading.astro';
+import { categories, projects } from '../data/projects';
+
+const filters = ['All', ...categories];
+const count = (c: string) => (c === 'All' ? projects.length : projects.filter((p) => p.categories.includes(c as never)).length);
+---
+
+<section id="projects" class="section bg-surface-2" aria-labelledby="projects-title">
+  <div class="container-page">
+    <SectionHeading index="03" label="Featured projects" id="projects-title">
+      Selected <span class="serif">work</span>
+      <Fragment slot="intro">
+        Built from my GitHub repositories and live websites. Numbers only appear where the repo or site reports them.
+      </Fragment>
+    </SectionHeading>
+
+    <div
+      class="sticky top-16 z-20 -mx-5 mt-14 border-y border-line bg-surface-2/95 px-5 py-3 backdrop-blur-sm sm:mx-0 sm:px-0 lg:mt-20"
+      data-reveal
+    >
+      <div class="overflow-x-auto" role="toolbar" aria-label="Filter projects by category">
+        <div class="flex w-max items-center gap-1">
+          <span class="mr-3 hidden font-mono text-[10.5px] tracking-[0.12em] text-muted uppercase sm:inline">Filter</span>
+          {
+            filters.map((f, i) => (
+              <button
+                type="button"
+                class="filter-btn rounded-[3px] border border-transparent px-3.5 py-2 text-[13px] font-medium whitespace-nowrap text-muted transition-colors hover:text-accent"
+                data-filter={f}
+                aria-pressed={i === 0 ? 'true' : 'false'}
+              >
+                {f} <span class="count ml-1 font-mono text-[11px] opacity-60 tabular-nums">{count(f)}</span>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <p class="sr-only" aria-live="polite" data-filter-status></p>
+
+    <ul class="mt-10 grid gap-6 lg:grid-cols-2 lg:gap-8">
+      {
+        projects.map((p, i) => (
+          <li data-project-item data-categories={p.categories.join('|')}>
+            <ProjectCard project={p} index={i} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .filter-btn[aria-pressed='true'] {
+    background: var(--ink);
+    color: var(--ink-text);
+  }
+  .filter-btn[aria-pressed='true'] .count {
+    color: var(--accent);
+    opacity: 1;
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const items = document.querySelectorAll<HTMLElement>('[data-project-item]');
+  const status = document.querySelector<HTMLElement>('[data-filter-status]');
+
+  buttons.forEach((btn) =>
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter ?? 'All';
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      let shown = 0;
+      items.forEach((item) => {
+        const match = filter === 'All' || (item.dataset.categories ?? '').split('|').includes(filter);
+        item.hidden = !match;
+        if (match) shown++;
+      });
+      if (status) status.textContent = `Showing ${shown} ${filter === 'All' ? '' : filter + ' '}projects`;
+    }),
+  );
+</script>

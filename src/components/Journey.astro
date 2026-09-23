@@ -1,0 +1,71 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import { journey } from '../data/skills';
+---
+
+<section id="journey" class="section" aria-labelledby="journey-title">
+  <div class="container-page">
+    <SectionHeading index="05" label="Journey" id="journey-title">
+      How my skills <span class="serif">built on each other</span>
+      <Fragment slot="intro">Each stage links to a project where I used it.</Fragment>
+    </SectionHeading>
+
+    <ol class="mt-14 grid lg:mt-20 lg:grid-cols-6" data-reveal>
+      {
+        journey.map((step, i) => {
+          const last = i === journey.length - 1;
+          return (
+            <li class="relative grid grid-cols-[2rem_1fr] gap-x-5 pb-10 last:pb-0 lg:block lg:pr-6 lg:pb-0">
+              <div class="relative flex flex-col items-center lg:flex-row" aria-hidden="true">
+                <span
+                  class:list={[
+                    'relative z-10 size-3 shrink-0 border',
+                    last ? 'border-accent bg-accent' : 'border-fg bg-bg',
+                  ]}
+                  style="margin-top:0.35rem"
+                />
+                {!last && <span class="connector" />}
+              </div>
+              <div class="lg:mt-8">
+                <p class="font-mono text-[11px] text-accent tabular-nums">{String(i + 1).padStart(2, '0')}</p>
+                <h3 class:list={['mt-1 text-xl font-semibold tracking-tight', last && 'text-accent']}>{step.stage}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-muted">{step.summary}</p>
+                <ul class="mt-4 space-y-1">
+                  {step.projects.map((p) => (
+                    <li>
+                      <a href={`/projects/${p.slug}/`} class="font-mono text-[11px] text-fg underline decoration-line-strong underline-offset-4 transition-colors hover:text-accent hover:decoration-accent">
+                        {p.name} →
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          );
+        })
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  /* Vertical rail on mobile, horizontal rail on desktop. */
+  .connector {
+    position: absolute;
+    top: 1.1rem;
+    bottom: -2.5rem;
+    left: 50%;
+    width: 1px;
+    background: var(--border-strong);
+  }
+  @media (min-width: 1024px) {
+    .connector {
+      position: static;
+      flex: 1;
+      height: 1px;
+      width: auto;
+      /* Extend through the column's right padding so the rail reaches the next node. */
+      margin: 0.35rem -1.5rem 0 0;
+    }
+  }
+</style>
