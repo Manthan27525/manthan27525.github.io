@@ -56,7 +56,6 @@ export const projects: Project[] = [
     ],
     stack: ['Python', 'Pandas', 'NumPy', 'Scikit-learn', 'Optuna', 'NLTK', 'FastAPI', 'Docker', 'Streamlit'],
     repo: gh('AutoDML'),
-    demo: 'https://autodml.streamlit.app/',
     details: {
       overview:
         'AutoDML (Automated Data Mining and Machine Learning) is a Python package plus API that runs the full tabular ML lifecycle from a single upload: preprocessing, analysis, visualization, model training, hyperparameter optimization and evaluation. A separate Streamlit frontend calls the API so the whole flow can be used without writing code.',
@@ -70,7 +69,6 @@ export const projects: Project[] = [
         'All fitted preprocessors are pickled so the same transformations are replayed at prediction time.',
       ],
       results: [
-        'Deployed Streamlit app at autodml.streamlit.app.',
         'Each run produces reusable artifacts: processed data, plots, an analysis report, an evaluation report, a trained model and a PDF report.',
       ],
       challenges: [

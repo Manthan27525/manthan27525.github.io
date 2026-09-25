@@ -1,6 +1,6 @@
 export const site = {
   name: 'Manthan Singh',
-  role: 'Data Scientist · Data Analyst · ML Engineer',
+  role: 'Data Scientist',
   title: 'Manthan Singh — Data Science, Analytics & Machine Learning',
   description:
     'Portfolio of Manthan Singh: data science, analytics and machine learning projects spanning SQL data warehousing, EDA, AutoML, LSTM forecasting on NIFTY 50 data, and fine-tuned transformer models.',
