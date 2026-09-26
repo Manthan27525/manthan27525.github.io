@@ -286,35 +286,55 @@ export const projects: Project[] = [
   {
     slug: 'trademind-ai',
     name: 'TradeMindAI',
-    tagline: 'LLM-powered stock assistant: natural-language ticker extraction and RAG over market data.',
+    tagline: 'AI stock research assistant that answers plain-English questions with RAG over live prices, indicators, fundamentals and news.',
     categories: ['AI', 'Finance'],
-    status: 'In progress',
     problem:
-      'Users ask about companies in plain language (“What’s going on with NVIDIA?”), but market-data tools need exact ticker symbols and structured data.',
+      'People ask about stocks in plain language (“Is Reliance overbought?”, “Compare TCS and Infosys”), but answering well needs exact tickers, current prices, computed indicators, fundamentals and recent news. A general-purpose LLM on its own has none of that and can invent numbers.',
     solution:
-      'A LangChain pipeline that uses an LLM (Gemini, wrapped as a custom LangChain LLM) to extract a yfinance-compatible ticker, downloads five years of price history, and indexes it in a FAISS vector store for retrieval-augmented answers.',
+      'A retrieval-augmented generation pipeline that runs fresh for every question. Gemini first extracts the tickers and rewrites follow-ups as standalone questions, yfinance fetches live data, indicators are computed locally with pandas, and a FAISS index selects the most relevant news before Gemini streams a data-backed answer into a Streamlit chat app.',
     features: [
-      'Custom LangChain LLM wrapper around the Google GenAI client',
-      'Few-shot prompt that maps company names to NSE (.NS), US and crypto tickers',
-      'Converts daily OHLCV rows into LangChain documents',
-      'Embeds with Hugging Face sentence embeddings and stores in FAISS',
+      'Conversational follow-ups: chat history resolves “it” or “them” to the right stocks',
+      'Compares up to three stocks in one question with a side-by-side table and a normalized % return chart',
+      'Technical analysis: 1D to 5Y returns, 52-week range, 50/200-day moving averages, RSI (14) and MACD (12, 26, 9)',
+      'Fundamentals such as P/E, EPS, margins, growth, beta and analyst target, plus news-aware answers',
+      'Streamed answers, 10-minute data cache, parallel fetching, and retry with a fallback Gemini model',
+      'Streamlit web app, interactive CLI and a Python API, with an offline pytest suite',
     ],
-    stack: ['Python', 'LangChain', 'Gemini API', 'FAISS', 'Hugging Face Embeddings', 'yfinance', 'RAG'],
+    stack: ['Python', 'LangChain', 'Gemini API', 'FAISS', 'Hugging Face Embeddings', 'yfinance', 'Pandas', 'Streamlit', 'pytest', 'RAG'],
+    stats: [
+      { value: '3', label: 'stocks compared per question' },
+      { value: '5', label: 'return horizons (1D to 5Y)' },
+      { value: '10 min', label: 'market-data cache' },
+    ],
     repo: gh('TradeMindAI'),
     details: {
       overview:
-        'An early-stage generative-AI project exploring retrieval-augmented generation for stock-market questions. The current code implements ticker extraction and the vector store; the user-facing app is still being built.',
-      dataset: 'Five years of daily OHLCV history per ticker, fetched live from Yahoo Finance with yfinance.',
+        'TradeMind AI is an educational stock research assistant. Ask a question in plain English and it fetches live prices, technical indicators, fundamentals and news from Yahoo Finance, retrieves the most relevant context and has Google Gemini write a concise answer grounded in that data. It works for anything on Yahoo Finance, including US stocks, NSE stocks (.NS) and crypto (BTC-USD).',
+      dataset:
+        'Fetched live per question with yfinance: five years of daily price history, company fundamentals and recent news headlines with summaries. Nothing is stored in the repo; data is cached in memory for 10 minutes.',
       approach: [
-        'A few-shot PromptTemplate instructs the LLM to return only a ticker symbol (or NONE).',
-        'Price history is converted into one text document per trading day.',
-        'Documents are embedded with HuggingFaceEmbeddings and indexed with FAISS, then saved locally for retrieval.',
+        'Query understanding: a single JSON-returning Gemini call extracts up to three tickers and rewrites follow-ups into standalone questions, saving a round-trip.',
+        'Data fetching: price history, news and fundamentals are fetched in parallel and cached.',
+        'Document building: each stock gets a summary with returns and indicators, a recent price table, a fundamentals document and one document per news item.',
+        'Retrieval: documents are embedded with all-mpnet-base-v2 into an in-memory FAISS index. Stats and fundamentals are always kept; semantic search ranks only the news.',
+        'Answer generation: Gemini, wrapped as a custom streaming LangChain LLM, writes a direct answer, supporting numbers, news sentiment and a disclaimer.',
       ],
-      results: ['Working ticker-extraction and vector-store pipeline. No evaluation has been published yet.'],
+      results: [
+        'Complete Streamlit chat app showing the streamed answer, key metrics per stock, an interactive price chart (1M to 5Y) and expandable fundamentals and news sections.',
+        'Offline test suite covering parsing, indicators, formatting, caching and the end-to-end pipeline, using a fake LLM, fake embeddings and synthetic prices.',
+      ],
       challenges: [
         {
-          title: 'Free text to exact symbols',
-          body: 'Company names, exchange suffixes and crypto pairs vary widely, so the extraction prompt encodes explicit rules and examples (e.g. Reliance → RELIANCE.NS, Bitcoin → BTC-USD).',
+          title: 'Keeping numbers exact',
+          body: 'RSI, MACD, moving averages and returns are computed locally with pandas rather than by the LLM, and price statistics and fundamentals are always placed in the context instead of being left to retrieval chance.',
+        },
+        {
+          title: 'Fresh data without a stale index',
+          body: 'The vector store is rebuilt in memory for every question, so answers always reflect current data and nothing generated is committed to the repository.',
+        },
+        {
+          title: 'An overloaded LLM API',
+          body: 'The Gemini wrapper retries on 429, 500 and 503 errors with backoff and falls back to a lighter model when the primary one is under high demand.',
         },
       ],
     },
