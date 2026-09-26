@@ -443,7 +443,62 @@ export const projects: Project[] = [
   },
 
   // Live websites. Descriptions come from each site's own pages and
-  // methodology notes; all four are built with Astro and Claude Code.
+  // methodology notes; all five are built with Astro and Claude Code.
+  {
+    slug: 'travelgearly',
+    name: 'TravelGearly',
+    tagline: 'Rule-based packing checklists and travel tools for Indian travellers, tailored to destination, month and trip style.',
+    categories: ['Web Apps'],
+    problem:
+      'Generic packing lists ignore where you are going, when, and how. Indian travellers also face specific questions that most lists skip: which plugs fit abroad, whether a power bank is allowed in the cabin, and which documents a domestic or international trip needs.',
+    solution:
+      'A static Astro site built around a rule-based packing engine. Each packing item carries conditions (weather, terrain, trip style, travel mode, domestic or international), and the engine combines them with month-by-month destination climate data to build a checklist and gear suggestions for the exact trip.',
+    features: [
+      'Packing-list wizard: destination, month, trip length, style and travel mode produce a grouped checklist with quantities',
+      'Multi-country international checklist that works out plug types, voltage, currencies and Schengen countries',
+      'Travel essentials finder, luggage weight calculator and rupee travel budget calculator',
+      'Interactive checklists: tick, add, remove, reset, print and download, saved in localStorage',
+      'Destination guides, gear buying guides and blog articles that link to each other automatically, with JSON-LD for SEO',
+    ],
+    stack: ['Astro', 'TypeScript', 'Tailwind CSS', 'Cloudflare Workers', 'Claude Code'],
+    stats: [
+      { value: '111', label: 'rule-based packing items' },
+      { value: '10', label: 'destinations with monthly climate' },
+      { value: '24', label: 'countries in the intl checklist' },
+    ],
+    demo: 'https://travelgearly.com/',
+    demoLabel: 'Visit site',
+    details: {
+      overview:
+        'A travel-essentials website for Indian travellers that generates packing checklists for a specific trip, then adds pre-departure checks and gear advice. It is built with Astro 7 as a fully static site and served as static assets on Cloudflare Workers.',
+      dataset:
+        'Hand-curated data stored in the codebase: 111 packing items with inclusion rules, 10 destinations (such as Goa, Ladakh, Dubai and Japan) with month-by-month weather, terrain and travel-mode notes, 24 countries with plug types, voltage and currency, and 13 gear categories. There are also 21 Markdown articles in a content collection.',
+      approach: [
+        'Each packing item has optional `when` conditions and is included when any one of them matches the trip. Quantities scale with trip length (for example, one top per day up to seven).',
+        'The trip context is built from the chosen destination’s climate for that month. When the destination is unknown or has no climate data, the tool asks for the weather and infers terrain from trip style.',
+        'The same functions build static pages at build time and run the interactive tools in the browser, so there is a single source of rules.',
+        'The international checklist merges the plug types of all selected countries and lists the adapters needed so both Indian two-pin and three-pin plugs will work.',
+        'Articles declare related gear, tools and destinations in frontmatter, and the site generates internal links, FAQ schema and breadcrumbs from them.',
+      ],
+      results: [
+        'Live at travelgearly.com with five tools, destination and gear guides, and a blog.',
+      ],
+      challenges: [
+        {
+          title: 'One rule set, two runtimes',
+          body: 'The packing engine is written as pure functions, so the same code builds static SEO pages and runs the tools in the browser. It could later be backed by a database that returns the same data shapes.',
+        },
+        {
+          title: 'Honest product recommendations',
+          body: 'Products are currently labelled demo archetypes. They describe what to look for and have no price, rating or affiliate tag. Product schema is only emitted for real products with a verified price, and the build fails on invalid affiliate URLs.',
+        },
+        {
+          title: 'Checklists that survive the real world',
+          body: 'Checklist state is saved per list in localStorage behind error handling, so the page still works when storage is blocked. A print-only view prints just the checklist, without the trip form.',
+        },
+      ],
+    },
+  },
   {
     slug: 'yearly-inflation-calculator',
     name: 'Yearly Inflation Calculator',
